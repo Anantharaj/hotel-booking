@@ -1,5 +1,5 @@
 /*
- * Recipes State Provider
+ * Hotel List State Provider
  *
  * The State provider create context and supplies to the components
  *

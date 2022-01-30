@@ -1,5 +1,5 @@
 /*
- * Recipes Actions
+ * Hotel List Actions
  *
  * Actions change things in your application
  * Since this applications uses a uni-directional data flow,

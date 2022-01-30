@@ -5,7 +5,7 @@
  */
 
 import React, { useEffect } from "react";
-import HotelListContainer from "./HotelListContainer";
+import HotelSearch from "./HotelSearchContainer";
 import { useHotelListStateValue, HotelListStateContext } from "./stateProvider";
 import { setHotels } from "./action";
 const axios = require("axios").default;
@@ -17,7 +17,7 @@ const Home = ({ hotels }) => {
     dispatch(setHotels(hotels));
   }, [hotels, dispatch]);
 
-  return <HotelListContainer />;
+  return <HotelSearch />;
 };
 
 export async function getServerSideProps(context) {
