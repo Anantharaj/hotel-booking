@@ -15,7 +15,7 @@
  *    }
  */
 
-import { SET_HOTELS, FILTERED_HOTELS, TOTAL_NIGHTS } from "./constants";
+import { SET_HOTELS, FILTERED_HOTELS, TOTAL_NIGHTS, SEARCHED_HOTELS } from "./constants";
 
 export function setHotels(data) {
   return {
@@ -35,5 +35,12 @@ export function setTotalNights(noOfNights) {
   return {
     type: TOTAL_NIGHTS,
     noOfNights,
+  };
+}
+
+export function setSearchedHotel(hotels) {
+  return {
+    type: SEARCHED_HOTELS,
+    hotels,
   };
 }

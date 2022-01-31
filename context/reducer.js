@@ -7,10 +7,11 @@
  *
  */
 
-import { SET_HOTELS, FILTERED_HOTELS, TOTAL_NIGHTS } from "./constants";
+import { SET_HOTELS, FILTERED_HOTELS, TOTAL_NIGHTS, SEARCHED_HOTELS } from "./constants";
 
 export const initialState = {
   allHotels: [],
+  searchByDateHotels: [],
   filteredHotels: [],
   totalNights: 0,
 };
@@ -22,6 +23,14 @@ const reducer = (state, action) => {
         ...state,
         allHotels: action.data,
       };
+
+    case SEARCHED_HOTELS: {
+      return {
+        ...state,
+        searchByDateHotels: action.hotels,
+        filteredHotels: action.hotels,
+      };
+    }
 
     case FILTERED_HOTELS: {
       return {

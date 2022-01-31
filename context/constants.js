@@ -12,3 +12,4 @@
 export const SET_HOTELS = "seera/Hotels/SET_HOTELS";
 export const FILTERED_HOTELS = "seera/Hotels/FILTERED_HOTELS";
 export const TOTAL_NIGHTS = "seera/Hotels/TOTAL_NIGHTS";
+export const SEARCHED_HOTELS = "seera/Hotels/SEARCHED_HOTELS";

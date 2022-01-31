@@ -22,7 +22,7 @@ import { useRouter } from "next/router";
 import { useHotelListStateValue } from "../../context/stateProvider";
 import Header from "../../component/Header";
 import { filterByDate, getNumberOfNights } from "./utility";
-import { setFilteredHotel, setTotalNights } from "../../context/action";
+import { setSearchedHotel, setTotalNights } from "../../context/action";
 
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
@@ -46,9 +46,9 @@ const HotelSearch = () => {
       dispatch(setTotalNights(numberOfNights));
 
       const filteredHotel = filterByDate(fromDate, toDate, hotels.allHotels);
-      dispatch(setFilteredHotel(filteredHotel));
+      dispatch(setSearchedHotel(filteredHotel));
 
-      router.push("HotelList");
+      router.push("hotellist");
     }
   };
 

@@ -12,7 +12,6 @@ const axios = require("axios").default;
 
 const Home = ({ hotels }) => {
   const [, dispatch] = useHotelListStateValue();
-  console.log("hotels", hotels);
   useEffect(() => {
     dispatch(setHotels(hotels));
   }, [hotels, dispatch]);

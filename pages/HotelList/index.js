@@ -1,81 +1,42 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
-import { makeStyles } from "@mui/styles";
-import { styled, alpha } from "@mui/material/styles";
 import Grid from "@mui/material/Grid";
-import InputBase from "@mui/material/InputBase";
 import SearchIcon from "@mui/icons-material/Search";
-
 import { useHotelListStateValue } from "../../context/stateProvider";
 import Header from "../../component/Header";
 import Slider from "../../component/Slider";
 import CardContainer from "../../component/Card";
 import { setFilteredHotel } from "../../context/action";
-import { sortHotels, debounce, searchByName } from "./utlity";
-
-const Main = styled("div")(({ theme }) => ({
-  padding: theme.spacing(0, 2),
-  height: "100%",
-  width: "100vw",
-  marginTop: "5%",
-}));
-
-const Search = styled("div")(({ theme }) => ({
-  position: "relative",
-  borderRadius: theme.shape.borderRadius,
-  marginLeft: 0,
-  width: "100%",
-  [theme.breakpoints.up("xs")]: {
-    marginLeft: theme.spacing(1),
-    width: "100%",
-    background: "none",
-    borderRadius: "25px",
-    border: "1px solid #556cd6",
-  },
-}));
-
-const SearchIconWrapper = styled("div")(({ theme }) => ({
-  padding: theme.spacing(0, 2),
-  height: "100%",
-  position: "absolute",
-  pointerEvents: "none",
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-}));
-
-const StyledInputBase = styled(InputBase)(({ theme }) => ({
-  color: "inherit",
-  "& .MuiInputBase-input": {
-    padding: theme.spacing(1, 1, 1, 0),
-    // vertical padding + font size from searchIcon
-    paddingLeft: `calc(1em + ${theme.spacing(4)})`,
-    transition: theme.transitions.create("width"),
-    width: "100%",
-  },
-}));
+import { sortHotels, debounce, throttle, searchByName, searchByPrice, getMinMaxPrice } from "./utlity";
+import { Main, Search, SearchIconWrapper, StyledInputBase } from "./styles";
 
 const HotelList = () => {
   const [state, dispatch] = useHotelListStateValue();
+  const [searchText, setSearchText] = useState("");
+  const [priceMin = 0, priceMax = 100] = getMinMaxPrice(state.allHotels);
+  const [sliderValue, setSliderValue] = useState(priceMin);
 
   const [debouncedFun] = useState((str) =>
     debounce((str) => {
-      const searchedResult = searchByName(str, state.filteredHotels);
-      dispatch(setFilteredHotel(searchedResult));
+      setSliderValue(priceMin);
+      const searchedHotels = searchByName(str, state.searchByDateHotels);
+      dispatch(setFilteredHotel(searchedHotels));
+    })
+  );
+
+  const [throttleFun] = useState((value) =>
+    throttle((value) => {
+      setSearchText("");
+      const filteredHotels = searchByPrice(value, state.searchByDateHotels);
+      dispatch(setFilteredHotel(filteredHotels));
     })
   );
 
   const handleSort = (attribute) => {
     const sortedHotel = sortHotels(state.filteredHotels, attribute);
     dispatch(setFilteredHotel(sortedHotel));
-  };
-
-  const handleSearchChange = (e) => {
-    // console.log(e.target.value);
-    debouncedFun(e.target.value);
-    // debounce(() => saveInput());
   };
 
   return (
@@ -109,13 +70,25 @@ const HotelList = () => {
                 </SearchIconWrapper>
                 <StyledInputBase
                   placeholder="Hotel Name"
-                  onChange={handleSearchChange}
+                  onChange={(e) => {
+                    debouncedFun(e.target.value);
+                    setSearchText(e.target.value);
+                  }}
                   inputProps={{ "aria-label": "search" }}
+                  value={searchText}
                 />
               </Search>
             </Grid>
             <Grid sx={{ ml: 1 }}>
-              <Slider />
+              <Slider
+                sliderValue={sliderValue}
+                handleChange={(value) => {
+                  setSliderValue(value);
+                  throttleFun(value);
+                }}
+                min={priceMin}
+                max={priceMax}
+              />
             </Grid>
           </Grid>
           <Grid container item md={8}>
