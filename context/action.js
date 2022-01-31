@@ -15,7 +15,7 @@
  *    }
  */
 
-import { SET_HOTELS, ADD_RECIPE_COUNT, REDUCE_RECIPE_COUNT } from "./constants";
+import { SET_HOTELS, FILTERED_HOTELS, TOTAL_NIGHTS } from "./constants";
 
 export function setHotels(data) {
   return {
@@ -24,16 +24,16 @@ export function setHotels(data) {
   };
 }
 
-export function addRecipesCount(recipe) {
+export function setFilteredHotel(hotels) {
   return {
-    type: ADD_RECIPE_COUNT,
-    recipe,
+    type: FILTERED_HOTELS,
+    hotels,
   };
 }
 
-export function reduceRecipesCount(recipe) {
+export function setTotalNights(noOfNights) {
   return {
-    type: REDUCE_RECIPE_COUNT,
-    recipe,
+    type: TOTAL_NIGHTS,
+    noOfNights,
   };
 }

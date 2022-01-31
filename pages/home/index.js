@@ -6,13 +6,13 @@
 
 import React, { useEffect } from "react";
 import HotelSearch from "./HotelSearchContainer";
-import { useHotelListStateValue, HotelListStateContext } from "./stateProvider";
-import { setHotels } from "./action";
+import { useHotelListStateValue, HotelListStateContext } from "../../context/stateProvider";
+import { setHotels } from "../../context/action";
 const axios = require("axios").default;
 
 const Home = ({ hotels }) => {
   const [, dispatch] = useHotelListStateValue();
-
+  console.log("hotels", hotels);
   useEffect(() => {
     dispatch(setHotels(hotels));
   }, [hotels, dispatch]);

@@ -1,6 +1,5 @@
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
-import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import { makeStyles } from "@mui/styles";
 import { styled, alpha } from "@mui/material/styles";
@@ -8,32 +7,28 @@ import Grid from "@mui/material/Grid";
 import InputBase from "@mui/material/InputBase";
 import SearchIcon from "@mui/icons-material/Search";
 
-import { useHotelListStateValue } from "../home/stateProvider";
+import { useHotelListStateValue } from "../../context/stateProvider";
 import Header from "../../component/Header";
 import Slider from "../../component/Slider";
 import CardContainer from "../../component/Card";
-import { styles } from "./styles";
-
-const useStyles = makeStyles(styles);
+import { setFilteredHotel } from "../../context/action";
+import { sortHotels } from "./utlity";
 
 const Main = styled("div")(({ theme }) => ({
   padding: theme.spacing(0, 2),
   height: "100%",
+  width: "100vw",
   marginTop: "5%",
 }));
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
   borderRadius: theme.shape.borderRadius,
-  backgroundColor: "blue", //alpha(theme.palette.common.white, 0.15),
-  "&:hover": {
-    backgroundColor: alpha(theme.palette.common.white, 0.25),
-  },
   marginLeft: 0,
   width: "100%",
-  [theme.breakpoints.up("sm")]: {
+  [theme.breakpoints.up("xs")]: {
     marginLeft: theme.spacing(1),
-    width: "auto",
+    width: "100%",
     background: "none",
     borderRadius: "25px",
     border: "1px solid #556cd6",
@@ -58,35 +53,37 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
     paddingLeft: `calc(1em + ${theme.spacing(4)})`,
     transition: theme.transitions.create("width"),
     width: "100%",
-    [theme.breakpoints.up("sm")]: {
-      width: "12ch",
-      "&:focus": {
-        width: "20ch",
-      },
-    },
   },
 }));
 
 const HotelList = () => {
-  const [hotels] = useHotelListStateValue();
+  const [state, dispatch] = useHotelListStateValue();
 
-  const classes = useStyles();
+  const handleSort = (attribute) => {
+    const sortedHotel = sortHotels(state.filteredHotels, attribute);
+    dispatch(setFilteredHotel(sortedHotel));
+  };
+
   return (
-    <Container disableGutters={true}>
+    <Container disableGutters={true} sx={{ mx: 0 }}>
       <Header />
 
       <Main>
         <Grid container justifyContent="flex-end" alignItems="center" sx={{ py: 2 }} rowSpacing={2} columnSpacing={2}>
           <Grid item md={4}>
             <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-              Total Nights: 5
+              Total Nights: {state.totalNights}
             </Typography>
           </Grid>
           <Grid item md={2}>
-            <Button variant="outlined">Sort by Name</Button>
+            <Button variant="outlined" onClick={() => handleSort("name")}>
+              Sort by Name
+            </Button>
           </Grid>
           <Grid item md={2}>
-            <Button variant="outlined">Sort by Price</Button>
+            <Button variant="outlined" onClick={() => handleSort("price")}>
+              Sort by Price
+            </Button>
           </Grid>
         </Grid>
         <Grid container rowSpacing={2} columnSpacing={2}>
@@ -104,18 +101,13 @@ const HotelList = () => {
             </Grid>
           </Grid>
           <Grid container item md={8}>
-            <Grid sm={6} sx={{ pb: 3 }}>
-              <CardContainer />
-            </Grid>
-            <Grid sm={6} sx={{ pb: 3 }}>
-              <CardContainer />
-            </Grid>
-            <Grid sm={6} sx={{ pb: 3 }}>
-              <CardContainer />
-            </Grid>
-            <Grid sm={6} sx={{ pb: 3 }}>
-              <CardContainer />
-            </Grid>
+            {state.filteredHotels.map((hotel, index) => {
+              return (
+                <Grid item sm={6} sx={{ pb: 3 }} key={index}>
+                  <CardContainer hotel={hotel} totalNights={state.totalNights} />
+                </Grid>
+              );
+            })}
           </Grid>
         </Grid>
       </Main>

@@ -7,7 +7,7 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
 
-const outlinedCard = (
+const outlinedCard = (hotel, totalNights) => (
   <React.Fragment>
     <CardContent>
       <Grid container>
@@ -18,7 +18,7 @@ const outlinedCard = (
         </Grid>
         <Grid item>
           <Typography variant="subtitle1" component="h2" sx={{ fontWeight: "lighter" }}>
-            Hotel Name
+            {hotel.name}
           </Typography>
         </Grid>
       </Grid>
@@ -31,7 +31,7 @@ const outlinedCard = (
         </Grid>
         <Grid item>
           <Typography variant="subtitle1" component="h2" sx={{ fontWeight: "lighter" }}>
-            125 AED
+            {hotel.price * totalNights} AED
           </Typography>
         </Grid>
       </Grid>
@@ -44,7 +44,7 @@ const outlinedCard = (
         </Grid>
         <Grid item>
           <Typography variant="subtitle1" component="h2" sx={{ fontWeight: "lighter" }}>
-            Dhubai
+            {hotel.city}
           </Typography>
         </Grid>
       </Grid>
@@ -52,10 +52,10 @@ const outlinedCard = (
   </React.Fragment>
 );
 
-export default function CardContainer() {
+export default function CardContainer({ hotel, totalNights }) {
   return (
     <Box sx={{ minWidth: 275, width: "auto", mr: 3 }}>
-      <Card variant="outlined">{outlinedCard}</Card>
+      <Card variant="outlined">{outlinedCard(hotel, totalNights)}</Card>
     </Box>
   );
 }

@@ -7,8 +7,8 @@ import { CacheProvider } from "@emotion/react";
 
 import theme from "../config/theme";
 import createEmotionCache from "../config/createEmotionCache";
-import { HotelListProvider } from "./home/stateProvider";
-import reducer, { initialState } from "./home/reducer";
+import { HotelListProvider } from "../context/stateProvider";
+import reducer, { initialState } from "../context/reducer";
 
 import "../styles/globals.css";
 

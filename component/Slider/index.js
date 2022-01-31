@@ -6,9 +6,14 @@ import Typography from "@mui/material/Typography";
 import Slider from "@mui/material/Slider";
 import MuiInput from "@mui/material/Input";
 
-const Input = styled(MuiInput)`
-  width: 42px;
-`;
+const Input = styled(MuiInput)(({ theme }) => ({
+  width: "42px",
+  borderRadius: "4px",
+  border: "1px solid #0000001f",
+  "&:after": {
+    border: "none",
+  },
+}));
 
 export default function InputSlider() {
   const [value, setValue] = React.useState(30);
@@ -54,6 +59,7 @@ export default function InputSlider() {
               max: 100,
               type: "number",
               "aria-labelledby": "input-slider",
+              border: "none",
             }}
           />
         </Grid>

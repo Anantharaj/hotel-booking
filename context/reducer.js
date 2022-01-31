@@ -7,10 +7,12 @@
  *
  */
 
-import { SET_HOTELS, ADD_RECIPE_COUNT, REDUCE_RECIPE_COUNT } from "./constants";
+import { SET_HOTELS, FILTERED_HOTELS, TOTAL_NIGHTS } from "./constants";
 
 export const initialState = {
   allHotels: [],
+  filteredHotels: [],
+  totalNights: 0,
 };
 
 const reducer = (state, action) => {
@@ -21,16 +23,17 @@ const reducer = (state, action) => {
         allHotels: action.data,
       };
 
-    case ADD_RECIPE_COUNT: {
+    case FILTERED_HOTELS: {
       return {
         ...state,
-        recipes: action.recipe,
+        filteredHotels: action.hotels,
       };
     }
-    case REDUCE_RECIPE_COUNT: {
+
+    case TOTAL_NIGHTS: {
       return {
         ...state,
-        recipes: action.recipe,
+        totalNights: action.noOfNights,
       };
     }
 
