@@ -1,3 +1,4 @@
+import React, { useEffect, useState } from "react";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
@@ -12,7 +13,7 @@ import Header from "../../component/Header";
 import Slider from "../../component/Slider";
 import CardContainer from "../../component/Card";
 import { setFilteredHotel } from "../../context/action";
-import { sortHotels } from "./utlity";
+import { sortHotels, debounce, searchByName } from "./utlity";
 
 const Main = styled("div")(({ theme }) => ({
   padding: theme.spacing(0, 2),
@@ -59,9 +60,22 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 const HotelList = () => {
   const [state, dispatch] = useHotelListStateValue();
 
+  const [debouncedFun] = useState((str) =>
+    debounce((str) => {
+      const searchedResult = searchByName(str, state.filteredHotels);
+      dispatch(setFilteredHotel(searchedResult));
+    })
+  );
+
   const handleSort = (attribute) => {
     const sortedHotel = sortHotels(state.filteredHotels, attribute);
     dispatch(setFilteredHotel(sortedHotel));
+  };
+
+  const handleSearchChange = (e) => {
+    // console.log(e.target.value);
+    debouncedFun(e.target.value);
+    // debounce(() => saveInput());
   };
 
   return (
@@ -93,7 +107,11 @@ const HotelList = () => {
                 <SearchIconWrapper>
                   <SearchIcon />
                 </SearchIconWrapper>
-                <StyledInputBase placeholder="Hotel Name" inputProps={{ "aria-label": "search" }} />
+                <StyledInputBase
+                  placeholder="Hotel Name"
+                  onChange={handleSearchChange}
+                  inputProps={{ "aria-label": "search" }}
+                />
               </Search>
             </Grid>
             <Grid sx={{ ml: 1 }}>

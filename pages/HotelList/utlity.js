@@ -14,8 +14,10 @@ export const debounce = (func, timeout = 300) => {
   };
 };
 
-function saveInput() {
-  console.log("Saving data");
-}
-
-const processChanges = debounce(() => saveInput());
+export const searchByName = (name, hotels) => {
+  const reg = new RegExp(name + ".+$", "i");
+  debugger;
+  return hotels.filter((hotel) => {
+    return hotel.name.search(reg) != -1;
+  });
+};
