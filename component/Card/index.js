@@ -1,4 +1,12 @@
-import * as React from "react";
+/*
+ * Hotel List Card Component
+ *
+ * After Search, users see of our App, at the '/hotellist' route.
+ * Inside a page it acts as hotel information container
+ */
+
+import React from "react";
+import PropTypes from "prop-types";
 import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
@@ -57,3 +65,14 @@ export default function CardContainer({ hotel, totalNights }) {
     </Box>
   );
 }
+
+CardContainer.propTypes = {
+  /**
+   * Hotel information as single object
+   */
+  hotel: PropTypes.object,
+  /**
+   * Total nights from selected date range
+   */
+  totalNights: PropTypes.number,
+};

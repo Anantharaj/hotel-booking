@@ -1,3 +1,8 @@
+/*
+ * Application initial component
+ *
+ */
+
 import Home from "./home";
 
 export default function Index() {

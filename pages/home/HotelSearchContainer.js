@@ -1,5 +1,5 @@
 /*
- * Recipes Page
+ * Home Page Container
  *
  * This is the first thing users see of our App, at the '/' route
  */

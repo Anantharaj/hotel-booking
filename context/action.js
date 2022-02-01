@@ -1,7 +1,7 @@
 /*
  * Hotel List Actions
  *
- * Actions change things in your application
+ * Actions change things in our application
  * Since this applications uses a uni-directional data flow,
  * we have these actions which are the only way your application interacts with
  * your application state. This guarantees that your state is up to date and nobody

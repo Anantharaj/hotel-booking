@@ -1,3 +1,7 @@
+/*
+ * Header of the Application in any page
+ */
+
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import AppBar from "@mui/material/AppBar";

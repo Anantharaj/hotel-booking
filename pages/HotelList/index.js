@@ -1,15 +1,23 @@
+/*
+ * Hotel List Page
+ *
+ * After Search, users see of our App, at the '/hotellist' route
+ */
+
 import React, { useState } from "react";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
 import SearchIcon from "@mui/icons-material/Search";
-import { useHotelListStateValue } from "../../context/stateProvider";
+
 import Header from "../../component/Header";
 import Slider from "../../component/Slider";
 import CardContainer from "../../component/Card";
 import { setFilteredHotel } from "../../context/action";
-import { sortHotels, debounce, throttle, searchByName, searchByPrice, getMinMaxPrice } from "./utlity";
+import { sortHotels, debounce, throttle, searchByName, searchByPrice, getMinMaxPrice } from "./utility";
+import { useHotelListStateValue } from "../../context/stateProvider";
+
 import { Main, Search, SearchIconWrapper, StyledInputBase } from "./styles";
 
 const HotelList = () => {
@@ -92,13 +100,19 @@ const HotelList = () => {
             </Grid>
           </Grid>
           <Grid container item md={8}>
-            {state.filteredHotels.map((hotel, index) => {
-              return (
-                <Grid item sm={6} sx={{ pb: 3 }} key={index}>
-                  <CardContainer hotel={hotel} totalNights={state.totalNights} />
-                </Grid>
-              );
-            })}
+            {state.filteredHotels.length ? (
+              state.filteredHotels.map((hotel, index) => {
+                return (
+                  <Grid item sm={6} sx={{ pb: 3 }} key={index}>
+                    <CardContainer hotel={hotel} totalNights={state.totalNights} />
+                  </Grid>
+                );
+              })
+            ) : (
+              <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+                Sorry! No Hotel is available on selected Date
+              </Typography>
+            )}
           </Grid>
         </Grid>
       </Main>
