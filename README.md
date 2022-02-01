@@ -4,7 +4,7 @@ This is an HotelBooking Application Fected the Hotel list directly from the end 
 
 ## Prerequisites
 
-You will need [Node.js](https://nodejs.org) version 8.0 or greater installed on your system.
+You will need [Node.js](https://nodejs.org) version 12.0 or greater installed on your system.
 
 ## Setup
 
@@ -30,8 +30,9 @@ To get started, just clone the repository and run below command
 
 ## Yarn
 
-yarn
-yarn dev
+    git clone https://github.com/iaincollins/nextjs-starter.git
+    yarn
+    yarn dev
 
 Note: If you are running on Windows run install --noptional flag (i.e. `npm install --no-optional`) which will skip installing fsevents.
 
