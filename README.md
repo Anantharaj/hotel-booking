@@ -1,34 +1,81 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Seera HotelBooking + Next.js frontend
 
-## Getting Started
+This is an HotelBooking Application Fetched the Hotel list directly from the end point.
+**The Application uses Reactjs + Nextjs + ContextApi + Meterial UI**
 
-First, run the development server:
+## Prerequisites
 
-```bash
-npm run dev
-# or
-yarn dev
+You will need [Node.js](https://nodejs.org) version 12.0 or greater installed on your system.
+
+## Setup
+
+Get the code by either cloning this repository using git
+
+```
+git clone https://github.com/Anantharaj/hotel-booking.git
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+... or [downloading source code] code as a zip archive.
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+Once downloaded, open the terminal in the project directory, and install dependencies with:
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+## Running locally in development mode
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+To get started, just clone the repository and run below command
 
-## Learn More
+## NPM
 
-To learn more about Next.js, take a look at the following resources:
+    git clone https://github.com/Anantharaj/hotel-booking.git
+    npm install
+    npm run dev
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Yarn
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+    git clone https://github.com/Anantharaj/hotel-booking.git
+    yarn
+    yarn dev
 
-## Deploy on Vercel
+The app should now be up and running at http://localhost:3000 🚀
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Building and deploying in production
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+If you wanted to run this site in production, you should install modules then build the site with `npm run build` and run it with `npm start`:
+
+## NPM
+
+    npm install
+    npm run build
+    npm start
+
+## Yarn
+
+    yarn
+    yarn build
+    yarn start
+
+You should run `npm run build` again any time you make changes to the site.
+
+Note: If you are already running a webserver on port 3000, you can still start the example in production mode by passing a different port as an Environment Variable when starting (e.g. `PORT=3030 npm start`).
+
+npm test or yarn test
+Runs the test watcher in an interactive mode.
+By default, runs tests related to files changed since the last commit.
+
+![Mock](http://res.cloudinary.com/divwiclgn/image/upload/v1501594231/code-assessment-mock_lauryh.png)
+
+## Implimentaion
+
+- User can select the date range to search hotels
+- Display all hotels whose availability dates lies between the search dates.
+- Display the total number of nights based on selected date range. (For example if user search from Aug 12, 2020 to Aug 17, 2020 than Total Number of Nights will be 5.)
+- Display hotel price based on number of nights. (Price x Number of Nights)
+
+### Features
+
+- User is able to sort based on hotel name and price
+- User is able to filter based on hotel name and price
+
+### Web Accessibility
+
+- Application also supports keyboard only users
+- Application responds by using Tab(Forward moves), Shift + Tab(Backward moves), Enter(Selection), Left and Right (left and right moves) keys

@@ -1,47 +1,74 @@
 /*
- * Recipes Page
+ * Home Page Container
  *
  * This is the first thing users see of our App, at the '/' route
  */
 
-import React, { useEffect } from "react";
+import React from "react";
 import CssBaseline from "@mui/material/CssBaseline";
-import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
-import AppBar from "@mui/material/AppBar";
-import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import AdapterDateFns from "@mui/lab/AdapterDateFns";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
 import DatePicker from "@mui/lab/DatePicker";
+import Snackbar from "@mui/material/Snackbar";
+import MuiAlert from "@mui/material/Alert";
 import Grid from "@mui/material/Grid";
-import { makeStyles } from "@mui/styles";
+import { compareAsc, isPast } from "date-fns";
+import { useRouter } from "next/router";
 
-import { useHotelListStateValue } from "./stateProvider";
+import { useHotelListStateValue } from "../../context/stateProvider";
 import Header from "../../component/Header";
-import { styles } from "./styles";
+import { filterByDate, getNumberOfNights } from "./utility";
+import { setSearchedHotel, setTotalNights } from "../../context/action";
 
-const useStyles = makeStyles(styles);
+const Alert = React.forwardRef(function Alert(props, ref) {
+  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
 
-const HotelSearch = ({ hotels }) => {
-  const classes = useStyles();
-  const [value, setValue] = React.useState(null);
-  const [name, setName] = React.useState("Cat in the Hat");
-  const handleChange = (event) => {
-    setName(event.target.value);
+const HotelSearch = () => {
+  const router = useRouter();
+  const [fromDate, setFromDate] = React.useState(null);
+  const [toDate, setToDate] = React.useState(null);
+  const [open, setOpen] = React.useState(false);
+
+  const [hotels, dispatch] = useHotelListStateValue();
+
+  const handleSearch = () => {
+    const diff = compareAsc(fromDate, toDate);
+    const isPastDate = isPast(fromDate);
+    if (diff !== -1 || isPastDate) {
+      setOpen(true);
+    } else {
+      const numberOfNights = getNumberOfNights(fromDate, toDate);
+      dispatch(setTotalNights(numberOfNights));
+
+      const filteredHotel = filterByDate(fromDate, toDate, hotels.allHotels);
+      dispatch(setSearchedHotel(filteredHotel));
+
+      router.push("hotellist");
+    }
   };
-  const [, dispatch] = useHotelListStateValue();
+
+  const handleAlertClose = () => setOpen(false);
 
   return (
     <React.Fragment>
       <CssBaseline />
-      <Container disableGutters={true}>
+      <Container disableGutters={true} sx={{ mx: 0 }}>
         <Header />
-        <Box
-          className={classes.root}
-          sx={{ justifyContent: "center", alignItems: "center", flexGrow: 1, overflow: "hidden", px: 3 }}
+        <Grid
+          container
+          sx={{
+            height: "90vh",
+            width: "100vw",
+            justifyContent: "center",
+            alignItems: "center",
+            overflow: "hidden",
+            px: 4,
+          }}
         >
           <Grid container spacing={3}>
             <Grid container spacing={3} item sm={5} justifyContent="center" alignItems="center">
@@ -53,11 +80,12 @@ const HotelSearch = ({ hotels }) => {
               <Grid item md={10} xs={8}>
                 <LocalizationProvider dateAdapter={AdapterDateFns}>
                   <DatePicker
-                    value={value}
+                    value={fromDate}
                     onChange={(newValue) => {
-                      setValue(newValue);
+                      setFromDate(newValue);
                     }}
                     renderInput={(params) => <TextField fullWidth {...params} />}
+                    minDate={new Date()}
                   />
                 </LocalizationProvider>
               </Grid>
@@ -71,9 +99,9 @@ const HotelSearch = ({ hotels }) => {
               <Grid item md={10} xs={8}>
                 <LocalizationProvider dateAdapter={AdapterDateFns}>
                   <DatePicker
-                    value={value}
+                    value={toDate}
                     onChange={(newValue) => {
-                      setValue(newValue);
+                      setToDate(newValue);
                     }}
                     renderInput={(params) => <TextField fullWidth {...params} />}
                   />
@@ -81,10 +109,17 @@ const HotelSearch = ({ hotels }) => {
               </Grid>
             </Grid>
             <Grid container item sm={2} justifyContent="center" alignItems="center">
-              <Button variant="outlined">Search</Button>
+              <Button variant="outlined" onClick={handleSearch}>
+                Search
+              </Button>
             </Grid>
           </Grid>
-        </Box>
+        </Grid>
+        <Snackbar open={open} autoHideDuration={6000} onClose={handleAlertClose}>
+          <Alert onClose={handleAlertClose} severity="error" sx={{ width: "100%" }}>
+            Given Date range not valid!
+          </Alert>
+        </Snackbar>
       </Container>
     </React.Fragment>
   );

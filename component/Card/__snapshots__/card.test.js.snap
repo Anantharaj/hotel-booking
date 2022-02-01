@@ -1,0 +1,83 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Card renders correctly 1`] = `
+<div
+  className="MuiBox-root css-1y93snx"
+>
+  <div
+    className="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiCard-root css-1v5z4dq-MuiPaper-root-MuiCard-root"
+  >
+    <div
+      className="MuiCardContent-root css-1nctmlo-MuiCardContent-root"
+    >
+      <div
+        className="MuiGrid-root MuiGrid-container css-11lq3yg-MuiGrid-root"
+      >
+        <div
+          className="MuiGrid-root MuiGrid-item css-1vm9s90-MuiGrid-root"
+        >
+          <h2
+            className="MuiTypography-root MuiTypography-subtitle1 css-10wpov9-MuiTypography-root"
+          >
+            Name:
+          </h2>
+        </div>
+        <div
+          className="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
+        >
+          <h2
+            className="MuiTypography-root MuiTypography-subtitle1 css-kbbqzj-MuiTypography-root"
+          >
+            Kempinski Hotel Mall of the Emirates
+          </h2>
+        </div>
+      </div>
+      <div
+        className="MuiGrid-root MuiGrid-container css-11lq3yg-MuiGrid-root"
+      >
+        <div
+          className="MuiGrid-root MuiGrid-item css-1vm9s90-MuiGrid-root"
+        >
+          <h2
+            className="MuiTypography-root MuiTypography-subtitle1 css-10wpov9-MuiTypography-root"
+          >
+            Price:
+          </h2>
+        </div>
+        <div
+          className="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
+        >
+          <h2
+            className="MuiTypography-root MuiTypography-subtitle1 css-kbbqzj-MuiTypography-root"
+          >
+            1000
+             AED
+          </h2>
+        </div>
+      </div>
+      <div
+        className="MuiGrid-root MuiGrid-container css-11lq3yg-MuiGrid-root"
+      >
+        <div
+          className="MuiGrid-root MuiGrid-item css-1vm9s90-MuiGrid-root"
+        >
+          <h2
+            className="MuiTypography-root MuiTypography-subtitle1 css-10wpov9-MuiTypography-root"
+          >
+            City:
+          </h2>
+        </div>
+        <div
+          className="MuiGrid-root MuiGrid-item css-13i4rnv-MuiGrid-root"
+        >
+          <h2
+            className="MuiTypography-root MuiTypography-subtitle1 css-kbbqzj-MuiTypography-root"
+          >
+            dubai
+          </h2>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;

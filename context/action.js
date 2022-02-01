@@ -1,7 +1,7 @@
 /*
  * Hotel List Actions
  *
- * Actions change things in your application
+ * Actions change things in our application
  * Since this applications uses a uni-directional data flow,
  * we have these actions which are the only way your application interacts with
  * your application state. This guarantees that your state is up to date and nobody
@@ -15,7 +15,7 @@
  *    }
  */
 
-import { SET_HOTELS, ADD_RECIPE_COUNT, REDUCE_RECIPE_COUNT } from "./constants";
+import { SET_HOTELS, FILTERED_HOTELS, TOTAL_NIGHTS, SEARCHED_HOTELS } from "./constants";
 
 export function setHotels(data) {
   return {
@@ -24,16 +24,23 @@ export function setHotels(data) {
   };
 }
 
-export function addRecipesCount(recipe) {
+export function setFilteredHotel(hotels) {
   return {
-    type: ADD_RECIPE_COUNT,
-    recipe,
+    type: FILTERED_HOTELS,
+    hotels,
   };
 }
 
-export function reduceRecipesCount(recipe) {
+export function setTotalNights(noOfNights) {
   return {
-    type: REDUCE_RECIPE_COUNT,
-    recipe,
+    type: TOTAL_NIGHTS,
+    noOfNights,
+  };
+}
+
+export function setSearchedHotel(hotels) {
+  return {
+    type: SEARCHED_HOTELS,
+    hotels,
   };
 }

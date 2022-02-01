@@ -1,32 +1,44 @@
-export const styles = () => ({
-  root: {
-    textAlign: "center",
-    display: "flex",
-    flexDirection: "column",
-    minHeight: "100vh",
-    color: "#000133",
+import { styled } from "@mui/material/styles";
+import InputBase from "@mui/material/InputBase";
+
+export const Main = styled("div")(({ theme }) => ({
+  padding: theme.spacing(0, 2),
+  height: "100%",
+  width: "100vw",
+  marginTop: "5%",
+}));
+
+export const Search = styled("div")(({ theme }) => ({
+  position: "relative",
+  borderRadius: theme.shape.borderRadius,
+  marginLeft: 0,
+  width: "100%",
+  [theme.breakpoints.up("xs")]: {
+    marginLeft: theme.spacing(1),
+    width: "100%",
+    background: "none",
+    borderRadius: "25px",
+    border: "1px solid #556cd6",
   },
-  appBar: {
-    //background: "#00022E",
-    color: "#FC86AA",
+}));
+
+export const SearchIconWrapper = styled("div")(({ theme }) => ({
+  padding: theme.spacing(0, 2),
+  height: "100%",
+  position: "absolute",
+  pointerEvents: "none",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+}));
+
+export const StyledInputBase = styled(InputBase)(({ theme }) => ({
+  color: "inherit",
+  "& .MuiInputBase-input": {
+    padding: theme.spacing(1, 1, 1, 0),
+    // vertical padding + font size from searchIcon
+    paddingLeft: `calc(1em + ${theme.spacing(4)})`,
+    transition: theme.transitions.create("width"),
+    width: "100%",
   },
-  container: {
-    display: "flex",
-    flex: 1,
-  },
-  drawer: {
-    background: "#D8DCD6",
-    width: "240px",
-    position: "static",
-  },
-  main: {
-    flex: 1,
-    background: "#f7f5f5",
-    color: "black",
-  },
-  footer: {
-    background: "#00022E",
-    height: "50px",
-    color: "#FC86AA",
-  },
-});
+}));

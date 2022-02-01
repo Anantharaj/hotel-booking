@@ -1,63 +1,62 @@
+/*
+ * Hotel List Slider Component
+ *
+ * After Search, users see of our App, at the '/hotellist' route.
+ * It acts as price filiter
+ */
+
 import * as React from "react";
-import { styled } from "@mui/material/styles";
+import PropTypes from "prop-types";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import Slider from "@mui/material/Slider";
-import MuiInput from "@mui/material/Input";
 
-const Input = styled(MuiInput)`
-  width: 42px;
-`;
-
-export default function InputSlider() {
-  const [value, setValue] = React.useState(30);
-
+export default function InputSlider({ handleChange, sliderValue, min, max }) {
   const handleSliderChange = (event, newValue) => {
-    setValue(newValue);
-  };
-
-  const handleInputChange = (event) => {
-    setValue(event.target.value === "" ? "" : Number(event.target.value));
-  };
-
-  const handleBlur = () => {
-    if (value < 0) {
-      setValue(0);
-    } else if (value > 100) {
-      setValue(100);
-    }
+    handleChange(newValue);
   };
 
   return (
-    <Box sx={{ width: 250 }}>
+    <Box sx={{ px: 2 }}>
       <Typography id="input-slider" gutterBottom>
         Price Filter
       </Typography>
       <Grid container spacing={2} alignItems="center">
         <Grid item xs>
           <Slider
-            value={typeof value === "number" ? value : 0}
+            value={typeof sliderValue === "number" ? sliderValue : 0}
             onChange={handleSliderChange}
+            min={min}
+            max={max}
             aria-labelledby="input-slider"
           />
         </Grid>
         <Grid item>
-          <Input
-            value={value}
-            size="small"
-            onChange={handleInputChange}
-            onBlur={handleBlur}
-            inputProps={{
-              step: 10,
-              min: 0,
-              max: 100,
-              type: "number",
-              "aria-labelledby": "input-slider",
-            }}
-          />
+          <Typography variant="subtitle1" component="h2" sx={{ fontWeight: "lighter" }}>
+            {sliderValue} PD
+          </Typography>
         </Grid>
       </Grid>
     </Box>
   );
 }
+
+InputSlider.propTypes = {
+  /**
+   * Callback method from slider
+   */
+  handleChange: PropTypes.func,
+  /**
+   * Slider value from slide position
+   */
+  sliderValue: PropTypes.number,
+  /**
+   * Minimum value form available hotellist
+   */
+  min: PropTypes.number,
+  /**
+   * Maximum value form available hotellist
+   */
+  max: PropTypes.number,
+};

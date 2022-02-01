@@ -1,15 +1,21 @@
-import * as React from "react";
+/*
+ * Hotel List Card Component
+ *
+ * After Search, users see of our App, at the '/hotellist' route.
+ * Inside a page it acts as hotel information container
+ */
+
+import React from "react";
+import PropTypes from "prop-types";
 import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
-import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
-import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
 
-const outlinedCard = (
+const outlinedCard = (hotel, totalNights) => (
   <React.Fragment>
-    <CardContent>
+    <CardContent sx={{ width: "400px", height: "120px" }}>
       <Grid container>
         <Grid item sx={{ pr: 1 }}>
           <Typography variant="subtitle1" component="h2">
@@ -18,7 +24,7 @@ const outlinedCard = (
         </Grid>
         <Grid item>
           <Typography variant="subtitle1" component="h2" sx={{ fontWeight: "lighter" }}>
-            Hotel Name
+            {hotel.name}
           </Typography>
         </Grid>
       </Grid>
@@ -31,7 +37,7 @@ const outlinedCard = (
         </Grid>
         <Grid item>
           <Typography variant="subtitle1" component="h2" sx={{ fontWeight: "lighter" }}>
-            125 AED
+            {hotel.price * totalNights} AED
           </Typography>
         </Grid>
       </Grid>
@@ -44,7 +50,7 @@ const outlinedCard = (
         </Grid>
         <Grid item>
           <Typography variant="subtitle1" component="h2" sx={{ fontWeight: "lighter" }}>
-            Dhubai
+            {hotel.city}
           </Typography>
         </Grid>
       </Grid>
@@ -52,10 +58,21 @@ const outlinedCard = (
   </React.Fragment>
 );
 
-export default function CardContainer() {
+export default function CardContainer({ hotel, totalNights }) {
   return (
-    <Box sx={{ minWidth: 275, width: "auto", mr: 3 }}>
-      <Card variant="outlined">{outlinedCard}</Card>
+    <Box sx={{ minWidth: 275, mr: 3 }}>
+      <Card variant="outlined">{outlinedCard(hotel, totalNights)}</Card>
     </Box>
   );
 }
+
+CardContainer.propTypes = {
+  /**
+   * Hotel information as single object
+   */
+  hotel: PropTypes.object,
+  /**
+   * Total nights from selected date range
+   */
+  totalNights: PropTypes.number,
+};
