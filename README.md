@@ -61,6 +61,8 @@ npm test or yarn test
 Runs the test watcher in an interactive mode.
 By default, runs tests related to files changed since the last commit.
 
+![Mock](http://res.cloudinary.com/divwiclgn/image/upload/v1501594231/code-assessment-mock_lauryh.png)
+
 ## Implimentaion
 
 - User can select the date range to search hotels
