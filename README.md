@@ -1,6 +1,7 @@
 # Seera HotelBooking + Next.js frontend
 
-This is an HotelBooking Application Fected the Hotel list directly from the end point. The Application usses Reactjs + Nextjs + ContextApi + Meterial UI
+This is an HotelBooking Application Fetched the Hotel list directly from the end point.
+**The Application uses Reactjs + Nextjs + ContextApi + Meterial UI**
 
 ## Prerequisites
 
@@ -34,8 +35,6 @@ To get started, just clone the repository and run below command
     yarn
     yarn dev
 
-Note: If you are running on Windows run install --noptional flag (i.e. `npm install --no-optional`) which will skip installing fsevents.
-
 The app should now be up and running at http://localhost:3000 🚀
 
 ## Building and deploying in production
@@ -56,7 +55,7 @@ If you wanted to run this site in production, you should install modules then bu
 
 You should run `npm run build` again any time you make changes to the site.
 
-Note: If you are already running a webserver on port 80 (e.g. Macs usually have the Apache webserver running on port 80) you can still start the example in production mode by passing a different port as an Environment Variable when starting (e.g. `PORT=3000 npm start`).
+Note: If you are already running a webserver on port 3000, you can still start the example in production mode by passing a different port as an Environment Variable when starting (e.g. `PORT=3030 npm start`).
 
 npm test or yarn test
 Runs the test watcher in an interactive mode.
