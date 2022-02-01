@@ -1,4 +1,4 @@
-import { sortHotels, debounce, throttle, searchByName, searchByPrice, getMinMaxPrice } from "./utlity";
+import { sortHotels, debounce, throttle, searchByName, searchByPrice, getMinMaxPrice } from "./utility";
 import * as sinon from "sinon";
 
 let clock;

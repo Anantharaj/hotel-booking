@@ -18,7 +18,7 @@ export default function InputSlider({ handleChange, sliderValue, min, max }) {
   };
 
   return (
-    <Box sx={{ width: 250 }}>
+    <Box sx={{ px: 2 }}>
       <Typography id="input-slider" gutterBottom>
         Price Filter
       </Typography>
@@ -34,7 +34,7 @@ export default function InputSlider({ handleChange, sliderValue, min, max }) {
         </Grid>
         <Grid item>
           <Typography variant="subtitle1" component="h2" sx={{ fontWeight: "lighter" }}>
-            {sliderValue}
+            {sliderValue} PD
           </Typography>
         </Grid>
       </Grid>

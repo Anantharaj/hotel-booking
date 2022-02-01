@@ -67,7 +67,7 @@ const HotelSearch = () => {
             justifyContent: "center",
             alignItems: "center",
             overflow: "hidden",
-            px: 20,
+            px: 4,
           }}
         >
           <Grid container spacing={3}>

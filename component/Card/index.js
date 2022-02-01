@@ -15,7 +15,7 @@ import Grid from "@mui/material/Grid";
 
 const outlinedCard = (hotel, totalNights) => (
   <React.Fragment>
-    <CardContent sx={{ width: "75%", height: "75%" }}>
+    <CardContent sx={{ width: "400px", height: "120px" }}>
       <Grid container>
         <Grid item sx={{ pr: 1 }}>
           <Typography variant="subtitle1" component="h2">

@@ -1,3 +1,4 @@
+import InputSlider from "./index";
 import { filterByDate, getNumberOfNights } from "./utility";
 
 describe("Hotel Search Page", () => {
